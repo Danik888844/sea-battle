@@ -1,0 +1,40 @@
+<div>
+  <span style="font-size: 24px;">Морской бой</span>
+  <br />
+  <button class="btn btn-primary" #startGame (click)="createShootField()">
+    Начать игру!
+  </button>
+</div>
+<br />
+<hr />
+<br />
+
+<div class="inline">
+  <table class="table" id="shootField">
+    <thead>
+        <th class="cell no_border" *ngFor="let letter of alphabet" >{{ letter }}</th>
+    </thead>
+    <tr *ngFor="let row of shootField; let i = index" >
+      <td class="cell no_border">{{ i }}</td>
+      <td *ngFor="let cell of row">
+          <app-cell [status]=cell.status [x]=cell.x [y]=cell.y (click)="shoot(cell)" ></app-cell>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="inline">
+  <h1 (ngModel)="info" style="text-align: center;">{{info}}</h1>
+</div>
+
+<div class="grid-container">
+  <p *ngFor="let ship of ships">
+    <nz-card style="width:300px;" nzTitle="{{ship.shipName| shipName}} на линии {{ship.posX}}">
+      <p>Точка 1 на Y: {{ship.dot1}}</p>
+      <p *ngIf="ship.dot2">Точка 2 на Y: {{ship?.dot2}}</p>
+      <p *ngIf="ship.dot3">Точка 3 на Y: {{ship?.dot3}}</p>
+      <p *ngIf="ship.dot4">Точка 4 на Y: {{ship?.dot4}}</p>
+    </nz-card>
+  </p>
+</div>
+  
